@@ -1,6 +1,6 @@
-public class MemberSigninScreen
+public class MemberSignInScreen
 {
-    public void MemberSignin()
+    public void MemberSignIn()
     {
         // Creates Signin screen for user indicatng they are already members.
         Console.Clear();

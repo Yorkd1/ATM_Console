@@ -1,8 +1,8 @@
 using System;
 
-public class PostSigninScreen
+public class PostSignInScreen
 {
-    public void PostSignin()
+    public void PostSignIn()
     {
         // Main screen that users will first interact with once signin is successful.
         Console.Clear();
