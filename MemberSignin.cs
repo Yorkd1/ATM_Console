@@ -6,7 +6,7 @@ public class MemberSignInScreen
         Console.Clear();
         Console.WriteLine();
         Console.WriteLine(" ******************************** ");
-        Console.WriteLine(" Please enter your card and type your 4 digit pin:");
+        Console.WriteLine(" Please enter your your 4 digit pin:");
         Console.Write("     Pin #");
         string pinNumber = Console.ReadLine();
         Console.WriteLine();

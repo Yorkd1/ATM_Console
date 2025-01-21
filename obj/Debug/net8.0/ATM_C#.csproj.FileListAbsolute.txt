@@ -12,3 +12,4 @@ D:\Computer Programming\Doc\CSE310\ATM_C#\obj\Debug\net8.0\refint\ATM_C#.dll
 D:\Computer Programming\Doc\CSE310\ATM_C#\obj\Debug\net8.0\ATM_C#.pdb
 D:\Computer Programming\Doc\CSE310\ATM_C#\obj\Debug\net8.0\ATM_C#.genruntimeconfig.cache
 D:\Computer Programming\Doc\CSE310\ATM_C#\obj\Debug\net8.0\ref\ATM_C#.dll
+D:\Computer Programming\Doc\CSE310\ATM_C#\obj\Debug\net8.0\ATM_C#.sourcelink.json
