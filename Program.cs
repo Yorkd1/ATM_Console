@@ -8,6 +8,7 @@ class Program
     {
     // Create user input for allowing the user to make choices. 
     String userInput = "";
+    
 
     while (userInput != "3")
     {
@@ -50,10 +51,11 @@ class Program
         
         else
         {
+            Console.Clear();
             Console.WriteLine("===========================================================");
             Console.WriteLine("Please type out the number of the option you wish to select.");
             Console.WriteLine("===========================================================");
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
         }
     }
     }

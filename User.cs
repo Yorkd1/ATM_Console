@@ -2,71 +2,46 @@ public class User
 {
     String _firstName;
     String _lastName;
-    int _cardNumber;
+    int _accountNumber;
     int _pinNumber;
     double _balance;
 
     // Utilize a constructor and instantiate User variables
-    public User(String firstName, String lastName, int cardNumber, int pinNumber, double balance) 
+    public User(String firstName, String lastName, int accountNumber, int pinNumber, double balance) 
     {
-        this._firstName = firstName;
-        this._lastName = lastName;
-        this._cardNumber = cardNumber;
-        this._pinNumber = pinNumber;
-        this._balance = balance;
+        _firstName = firstName;
+        _lastName = lastName;
+        _accountNumber = accountNumber;
+        _pinNumber = pinNumber;
+        _balance = balance;
     }
 
-    // Create getters to more easily retrieve User information.
-    public String getFirstName() 
+    // Methods to get member variable values
+    public String GetFirstName() => _firstName;
+    public String GetLastName() => _lastName;
+    public int GetAccountNumber() => _accountNumber;
+    public int GetPinNumber() => _pinNumber;
+    public double GetBalance() => _balance;
+
+    // Methods to set member variables values
+    public void SetFirstName(String fName)
     {
-        return _firstName;
+        _firstName = fName;
     }
-
-    public String getLastName()
+    public void SetLastName(String lName)
     {
-        return _lastName;
+        _lastName = lName;
     }
-
-    public int getCardNumber()
+    public void SetAccountNumber(int accountNum)
     {
-        return _cardNumber;
+        _accountNumber = accountNum;
     }
-
-    public int getPin()
+    public void SetPinNumber(int pinNum)
     {
-        return _pinNumber;
+        _pinNumber = pinNum;
     }
-
-    public double getBalance()
+    public void SetBalance(double bal)
     {
-        return _balance;
+        _balance = bal;
     }
-
-    // Create setters for better updating User information.
-    public void setFirstName(String newFirstName)
-    {
-        _firstName = newFirstName;
-    }
-
-    public void setLastName(String newLastName)
-    {
-        _lastName = newLastName;
-    }
-
-    public void setCardNumber(int newCardNumber)
-    {
-        _cardNumber = newCardNumber;
-    }
-
-    public void setPinNumber(int newPinNumber)
-    {
-        _pinNumber = newPinNumber;
-    }
-
-    public void setBalance(double newBalance)
-    {
-        _balance = newBalance;
-    }
-
-
 }
