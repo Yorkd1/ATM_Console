@@ -15,7 +15,7 @@ class Program
         // Welcomes user and determines if user is member or not.
         Console.Clear();
         Console.WriteLine("----------------------------");
-        Console.WriteLine("Welcome to the Bank of York!");
+        Console.WriteLine("Welcome to the Bank of York!"); 
         Console.WriteLine("----------------------------");
         Console.WriteLine();
         Console.WriteLine(" ********************************************** ");
