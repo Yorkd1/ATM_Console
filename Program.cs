@@ -32,25 +32,30 @@ class Program
         Console.Write("Please write the number of the option you wish to select: ");
         userInput = Console.ReadLine();
 
+        // Determines what choice the user indicated.
         if (userInput == "1")
         {
+            // Launches the sign in screen to verify user information.
             MemberSignInScreen memberSignIn = new MemberSignInScreen();
             memberSignIn.MemberSignIn();
         }
 
         else if (userInput == "2")
         {
+            // Launches new user account creation screen to recieve new user account information.
             NewUserAccount newUser = new NewUserAccount();
             newUser.NewAccountScreen();
         }
 
         else if  (userInput == "3")
         {
+            // Exits the program.
             break;
         }
         
         else
         {
+            // For inputs not indicated above.
             Console.Clear();
             Console.WriteLine("===========================================================");
             Console.WriteLine("Please type out the number of the option you wish to select.");

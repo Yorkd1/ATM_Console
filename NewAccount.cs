@@ -1,5 +1,6 @@
 public class NewUserAccount
 {
+    // Create public list of users to store information on each user
     public static List<User> users { get; private set; } = new List<User>();
 
     public void NewAccountScreen()

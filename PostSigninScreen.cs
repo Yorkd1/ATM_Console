@@ -3,6 +3,7 @@ using System.Threading;
 
 public class PostSignInScreen
 {
+    // Create the main atm feature screen for user members
     public void PostSignIn(User signedInUser)
     {
         bool isRunning = true;
@@ -47,6 +48,7 @@ public class PostSignInScreen
         }
     }
 
+    // Withdrawal method for users to take out money from their account
     private void Withdrawal(User user)
     {
         Console.Clear();
@@ -77,6 +79,7 @@ public class PostSignInScreen
         Console.ReadLine();
     }
 
+    // Deposit method for users to put money into their account
     private void Deposit(User user)
     {
         Console.Clear();
@@ -107,6 +110,7 @@ public class PostSignInScreen
         Console.ReadLine();
     }
 
+    // Displays user's balance
     private void DisplayBalance(User user)
     {
         Console.Clear();
