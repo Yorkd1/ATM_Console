@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 
 public class PostSignInScreen
 {
@@ -40,7 +41,7 @@ public class PostSignInScreen
                     break;
                 default:
                     Console.WriteLine("Invalid option. Please try again.");
-                    Console.ReadLine();
+                    Thread.Sleep(2000);
                     break;
             }
         }
@@ -52,19 +53,26 @@ public class PostSignInScreen
         Console.WriteLine(" ******************************** ");
         Console.WriteLine("| Withdrawal                      |");
         Console.WriteLine(" ******************************** ");
-        Console.Write("Enter the amount to withdraw: ");
-        double amount = double.Parse(Console.ReadLine());
+        Console.Write("Enter the amount to withdraw: $");
+        
+        double amount;
+        bool isValidWithdrawal = false;
 
-        if (amount > 0 && amount <= user.GetBalance())
+        while (!isValidWithdrawal)
         {
-            // Deduct the amount from the user's balance
-            double newBalance = user.GetBalance() - amount;
-            Console.WriteLine($"Withdrawal successful! Your new balance is: ${newBalance:F2}");
-            user.SetBalance(newBalance);
-        }
-        else
-        {
-            Console.WriteLine("Invalid amount or insufficient balance.");
+            string input = Console.ReadLine();
+            if (double.TryParse(input, out amount) && amount > 0 && amount <= user.GetBalance())
+            {
+                isValidWithdrawal = true;
+                // Deduct the amount from the user's balance
+                double newBalance = user.GetBalance() - amount;
+                Console.WriteLine($"Withdrawal successful! Your new balance is: ${newBalance:F2}");
+                user.SetBalance(newBalance);
+            }
+            else
+            {
+                Console.WriteLine("Invalid amount or insufficient balance. Please enter a valid amount.");
+            }
         }
         Console.ReadLine();
     }
@@ -75,19 +83,26 @@ public class PostSignInScreen
         Console.WriteLine(" ******************************** ");
         Console.WriteLine("| Deposit                         |");
         Console.WriteLine(" ******************************** ");
-        Console.Write("Enter the amount to deposit: ");
-        double amount = double.Parse(Console.ReadLine());
+        Console.Write("Enter the amount to deposit: $");
+        
+        double amount;
+        bool isValidDeposit = false;
 
-        if (amount > 0)
+        while (!isValidDeposit)
         {
-            // Add the amount to the user's balance
-            double newBalance = user.GetBalance() + amount;
-            Console.WriteLine($"Deposit successful! Your new balance is: ${newBalance:F2}");
-            user.SetBalance(newBalance);
-        }
-        else
-        {
-            Console.WriteLine("Invalid amount. Please try again.");
+            string input = Console.ReadLine();
+            if (double.TryParse(input, out amount) && amount > 0)
+            {
+                isValidDeposit = true;
+                // Add the amount to the user's balance
+                double newBalance = user.GetBalance() + amount;
+                Console.WriteLine($"Deposit successful! Your new balance is: ${newBalance:F2}");
+                user.SetBalance(newBalance);
+            }
+            else
+            {
+                Console.WriteLine("Invalid amount. Please enter a positive amount.");
+            }
         }
         Console.ReadLine();
     }
@@ -102,4 +117,3 @@ public class PostSignInScreen
         Console.ReadLine();
     }
 }
-

@@ -1,4 +1,5 @@
 using System.Threading;
+
 public class MemberSignInScreen
 {
     public void MemberSignIn()
@@ -15,10 +16,42 @@ public class MemberSignInScreen
             Console.WriteLine(" ******************************** ");
             Console.WriteLine(" Please enter your 8 digit account number: ");
             Console.Write("    Account # ");
-            int accountNumber = int.Parse(Console.ReadLine());
+
+            // Verify if account number is valid
+            int accountNumber = 0;
+            bool isValidAccount = false;
+            while (!isValidAccount)
+            {
+                string accountInput = Console.ReadLine();
+                if (int.TryParse(accountInput, out accountNumber) && accountNumber.ToString().Length == 8)
+                {
+                    isValidAccount = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid account number. Please enter a valid 8 digit account number: ");
+                }
+            }
+
             Console.WriteLine(" Please enter your 4 digit pin:");
             Console.Write("     Pin # ");
-            int pinNumber = int.Parse(Console.ReadLine());
+
+            // Verify if pin number is valid
+            int pinNumber = 0;
+            bool isValidPin = false;
+            while (!isValidPin)
+            {
+                string pinInput = Console.ReadLine();
+                if (int.TryParse(pinInput, out pinNumber) && pinNumber.ToString().Length == 4)
+                {
+                    isValidPin = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid pin. Please enter a valid 4 digit pin number: ");
+                }
+            }
+
             Console.WriteLine();
             Console.WriteLine(" ******************************** ");
 
