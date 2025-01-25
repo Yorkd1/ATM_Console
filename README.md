@@ -9,14 +9,14 @@ The purpose of me writting this program was to practice what I was taught in C# 
 
 Here is a link to a YouTube video demonstrating how my program works:
 
-[Software Demo Video](http://youtube.link.goes.here)
+[ATM Console](https://youtu.be/1cQGsz1gQ5o)
 
 # Development Environment
 
 * Visual Studio Code
 * C# Programming Language
 * Git / GitHub
-
+* .NET SDK
 
 The programming language utilized in this program is C#. 
 
