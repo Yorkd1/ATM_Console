@@ -43,9 +43,9 @@ public class PostSignInScreen
                     isRunning = false;
                     break;
                 case "5":
-                DeleteUser(signedInUser);
-                isRunning = false;
-                break;
+                    DeleteUser(signedInUser);
+                    isRunning = false;
+                    break;
                 default:
                     Console.WriteLine("Invalid option. Please try again.");
                     Thread.Sleep(2000);
