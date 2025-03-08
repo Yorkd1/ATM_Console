@@ -10,6 +10,7 @@ The purpose of me writting this program was to practice what I was taught in C# 
 Here is a link to a YouTube video demonstrating how my program works:
 
 [ATM Console](https://youtu.be/1cQGsz1gQ5o)
+[Database Connection](https://youtu.be/bEk6rwpw7lo)
 
 # Relational Database
 

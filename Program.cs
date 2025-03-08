@@ -17,7 +17,7 @@ class Program
         while (userInput != "3")
         {
             // Welcomes user and determines if user is member or not.
-            // Console.Clear();
+            Console.Clear();
             Console.WriteLine("----------------------------");
             Console.WriteLine("Welcome to the Bank of York!"); 
             Console.WriteLine("----------------------------");
