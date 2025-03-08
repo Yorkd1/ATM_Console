@@ -1,7 +1,14 @@
+using System;
 using System.Threading;
-
+using Microsoft.Data.SqlClient;
 public class MemberSignInScreen
 {
+    private string _connectionString;
+
+    public MemberSignInScreen(string connectionString)
+    {
+        _connectionString = connectionString;
+    }
     public void MemberSignIn()
     {
         int maxAttempts = 3;
@@ -55,37 +62,68 @@ public class MemberSignInScreen
             Console.WriteLine();
             Console.WriteLine(" ******************************** ");
 
-            // Check if the account exists and if the pin matches
-            // Iterate through the list of users and check for a match
-            foreach (var user in NewUserAccount.users)
+            // Get user from database
+            User user = GetUserFromDatabase(accountNumber, pinNumber);
+            if (user != null)
             {
-                if (user.GetAccountNumber() == accountNumber && user.GetPinNumber() == pinNumber)
-                {
-                    Console.Clear();
-                    Console.WriteLine($"Welcome back, {user.GetFirstName()} {user.GetLastName()}!");
-                    isAuthenticated = true;
-                    Thread.Sleep(3000);
-                    PostSignInScreen postSignIn = new PostSignInScreen();
-                    postSignIn.PostSignIn(user);
-                    break;
-                }
+                Console.Clear();
+                Console.WriteLine($"Welcome back!");
+                Thread.Sleep(3000);
+                
+                // Proceed to the post-sign-in menu
+                PostSignInScreen postSignIn = new PostSignInScreen();
+                postSignIn.PostSignIn(user);
+                break;
             }
 
-            // If authentication fails, increment the attempt counter
-            if (!isAuthenticated)
+            // If authentication fails, increment attempt counter
+            attempts++;
+            if (attempts < maxAttempts)
             {
-                attempts++;
-                if (attempts < maxAttempts)
-                {
-                    Console.WriteLine("Invalid account number or pin. Please try again.");
-                    Console.ReadLine();
-                }
-                else
-                {
-                    Console.WriteLine("You have exceeded the maximum number of attempts. Returning to Main Menu.");
-                    Thread.Sleep(5000);
-                }
+                Console.WriteLine("Invalid account number or pin. Please try again.");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("You have exceeded the maximum number of attempts. Returning to Main Menu.");
+                Thread.Sleep(5000);
             }
         }
     }
+        private User GetUserFromDatabase(int accountNumber, int pinNumber)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+                    string sql = "SELECT firstName, lastName, accountNumber, pinNumber, balance FROM Users WHERE accountNumber = @accountNumber AND pinNumber = @pinNumber";
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@accountNumber", accountNumber);
+                        cmd.Parameters.AddWithValue("@pinNumber", pinNumber.ToString());
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return new User(
+                                    reader.GetString(0),
+                                    reader.GetString(1),
+                                    reader.GetInt32(2),   
+                                    int.Parse(reader.GetString(3)),
+                                    Convert.ToDouble(reader["balance"])
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Database Error: {ex.Message}");
+            }
+            return null;
+        }
 }
+

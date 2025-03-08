@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Microsoft.Data.SqlClient;
 
 public class PostSignInScreen
 {
@@ -19,6 +20,7 @@ public class PostSignInScreen
             Console.WriteLine("| 2. Deposit                      |");
             Console.WriteLine("| 3. Balance                      |");
             Console.WriteLine("| 4. Logout                       |");
+            Console.WriteLine("| 5. Delete Account               |");
             Console.WriteLine("|                                 |");
             Console.WriteLine(" ******************************** ");
 
@@ -40,6 +42,10 @@ public class PostSignInScreen
                     Console.WriteLine("Thank you for using our service. Goodbye!");
                     isRunning = false;
                     break;
+                case "5":
+                DeleteUser(signedInUser);
+                isRunning = false;
+                break;
                 default:
                     Console.WriteLine("Invalid option. Please try again.");
                     Thread.Sleep(2000);
@@ -68,8 +74,9 @@ public class PostSignInScreen
                 isValidWithdrawal = true;
                 // Deduct the amount from the user's balance
                 double newBalance = user.GetBalance() - amount;
-                Console.WriteLine($"Withdrawal successful! Your new balance is: ${newBalance:F2}");
                 user.SetBalance(newBalance);
+                UpdateUserBalance(user);
+                Console.WriteLine($"Withdrawal successful! Your new balance is: ${newBalance:F2}");
             }
             else
             {
@@ -99,8 +106,9 @@ public class PostSignInScreen
                 isValidDeposit = true;
                 // Add the amount to the user's balance
                 double newBalance = user.GetBalance() + amount;
-                Console.WriteLine($"Deposit successful! Your new balance is: ${newBalance:F2}");
                 user.SetBalance(newBalance);
+                UpdateUserBalance(user);
+                Console.WriteLine($"Deposit successful! Your new balance is: ${newBalance:F2}");
             }
             else
             {
@@ -118,6 +126,61 @@ public class PostSignInScreen
         Console.WriteLine("| Account Balance                 |");
         Console.WriteLine(" ******************************** ");
         Console.WriteLine($"Your current balance is: ${user.GetBalance():F2}");
+        Console.ReadLine();
+    }
+
+    // Update user balance on the database side. 
+    private void UpdateUserBalance(User user)
+    {
+        string connectionString = "Server=DESKTOP-0Q9MU8N\\SQLEXPRESS;Database=ATM_UsersDB;Integrated Security=True;TrustServerCertificate=True;";
+
+        using (SqlConnection conn = new SqlConnection(connectionString))
+        {
+            conn.Open();
+            string sql = "UPDATE Users SET balance = @balance WHERE accountNumber = @accountNumber";
+
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@balance", user.GetBalance());
+                cmd.Parameters.AddWithValue("@accountNumber", user.GetAccountNumber());
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
+    // Deletes a user on the database side
+    private void DeleteUser(User user)
+    {
+        Console.Clear();
+        Console.WriteLine(" ******************************** ");
+        Console.WriteLine("| Delete Account                   |");
+        Console.WriteLine(" ******************************** ");
+        Console.Write("Are you sure you want to delete your account? (yes/no): ");
+
+        string confirmation = Console.ReadLine().ToLower();
+        if (confirmation == "yes")
+        {
+            string connectionString = "Server=DESKTOP-0Q9MU8N\\SQLEXPRESS;Database=ATM_UsersDB;Integrated Security=True;TrustServerCertificate=True;";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "DELETE FROM Users WHERE accountNumber = @accountNumber";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@accountNumber", user.GetAccountNumber());
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            
+            Console.WriteLine("Your account has been deleted. We're sad to see you go!");
+        }
+        else
+        {
+            Console.WriteLine("Account deletion avoided. Whew!");
+        }
         Console.ReadLine();
     }
 }

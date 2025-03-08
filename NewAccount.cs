@@ -1,7 +1,16 @@
+using System;
+using System.Collections.Generic;
+using Microsoft.Data.SqlClient;
 public class NewUserAccount
 {
-    // Create public list of users to store information on each user
-    public static List<User> users { get; private set; } = new List<User>();
+    
+    // Make a new connection string for the SQL Server Database
+    private string _connectionString;
+
+    public NewUserAccount(string connectionString)
+    {
+        _connectionString = connectionString;
+    }
 
     public void NewAccountScreen()
     {
@@ -70,13 +79,30 @@ public class NewUserAccount
             Console.Write("Would you like to continue to create your account using this information? ");
             userInput = Console.ReadLine().ToLower();
 
+            
+
             if (userInput == "yes")
             {
                 // Establish the customer information with the setters in Users.
                 Random rand = new Random();
-                int accountNumber = rand.Next(10000000, 100000000);
-                User user = new User(firstName, lastName, accountNumber, pinNumber, balance);
-                users.Add(user);
+                int accountNumber = rand.Next(10000000, 99999999);
+
+                // Make new instance to connect to SQL Server
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+                    string sql = "INSERT INTO Users (firstName, lastName, accountNumber, pinNumber, balance) VALUES (@firstName, @lastName, @accountNumber, @pinNumber, @balance)";
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@firstName", firstName);
+                        cmd.Parameters.AddWithValue("@lastName", lastName);
+                        cmd.Parameters.AddWithValue("@accountNumber", accountNumber);
+                        cmd.Parameters.AddWithValue("@pinNumber", pinNumber);
+                        cmd.Parameters.AddWithValue("@balance", balance);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                 }
                 Console.WriteLine($"Your account number is: {accountNumber}");
                 Console.ReadLine();
                 break;
@@ -92,16 +118,4 @@ public class NewUserAccount
         }
     }
 
-
-
-    // Manual testing: Display user list...
-    public void DisplayUsers()
-    {
-        foreach (var user in users)
-        {
-            Console.WriteLine($"Name: {user.GetFirstName()} {user.GetLastName()}, " +
-                              $"Account Number: {user.GetAccountNumber()}, " +
-                              $"Balance: ${user.GetBalance():0.00}");
-        }
-    }
 }
