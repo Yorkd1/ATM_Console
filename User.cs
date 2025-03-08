@@ -48,6 +48,7 @@ public class User
         _balance = bal;
     }
 
+    // Retrieves a user from the database using their account number.
     public static User GetUserByAccountNumber(int accountNumber)
     {
         string connectionString = "Server=DESKTOP-0Q9MU8N\\SQLEXPRESS;Database=ATM_UsersDB;Integrated Security=True;TrustServerCertificate=True;";

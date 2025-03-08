@@ -90,6 +90,8 @@ public class MemberSignInScreen
             }
         }
     }
+
+        // Retrieve the user from the database using the account number and PIN.
         private User GetUserFromDatabase(int accountNumber, int pinNumber)
         {
             try

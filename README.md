@@ -11,6 +11,10 @@ Here is a link to a YouTube video demonstrating how my program works:
 
 [ATM Console](https://youtu.be/1cQGsz1gQ5o)
 
+# Relational Database
+
+The database I decided to use for this program was Microsoft SQL Server. I figured since C# and SQL Server were both made by Microsoft that they might have better compatibility and features for connecting the two. Ultimately this program's purpose was to help me learn how to connect a database and practice OOP concepts.
+
 # Used Technologies
 
 * Visual Studio Code
@@ -28,7 +32,7 @@ Websites I found helpful for this program are the following:
 - [C# Documentation](https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/)
 - [VS Code C# Setup](https://code.visualstudio.com/docs/csharp/get-started)
 - [Features of ATMs](https://unacademy.com/content/bank-exam/study-material/general-awareness/features-of-an-atm/)
-- [Microsoft.Data.SqlClient_Namespace] (https://learn.microsoft.com/en-us/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace?view=sql-server-ver16)
+- [Microsoft.Data.SqlClient Namespace](https://learn.microsoft.com/en-us/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace?view=sql-server-ver16)
 
 # Future Work
 

@@ -11,7 +11,7 @@ class Program
         // Create user input for allowing the user to make choices. 
         String userInput = "";
         
-        // Hardcoded SQL Server connection string
+        // SQL Server connection string (hardcoded for now, ideally should be in a config file)
         string connectionString = "Server=DESKTOP-0Q9MU8N\\SQLEXPRESS;Database=ATM_UsersDB;Integrated Security=True;TrustServerCertificate=True;";
 
         while (userInput != "3")
